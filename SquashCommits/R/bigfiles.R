@@ -1,8 +1,9 @@
 bigfiles =
-function(dir) 
+function(dir = "~/Downloads", pattern = character(), ...,
+          files = list.files(dir, pattern = pattern, full = TRUE, ...),
+          info = file.info(files)) 
 {
-    i = file.info(list.files(dir))
-    i[order(i$size, decreasing = TRUE), c("size", "ctime"), drop = FALSE]
+    info[order(info$size, decreasing = TRUE), c("size", "ctime"), drop = FALSE]
 }
 
 

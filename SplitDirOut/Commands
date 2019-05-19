@@ -1,0 +1,268 @@
+[Workshops-393]>mkdir ~/GitExpt
+>[Workshops-394]>cp -r RCInterface ~/GitExpt
+[Workshops-395]>cd ~/GitExpt/RCInterface/
+]1; RCInterface]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/RCInterface[RCInterface-396]>ls
+CompileSteps/	README.md	Rqpdf/		Topics.md~	URLs~		getrusage/	slides.html~
+Plus/		README.md~	Topics.md	URLs		dotC/		slides.html
+[RCInterface-397]>rmb
+[RCInterface-398]>ls
+CompileSteps/	README.md	Topics.md	dotC/		slides.html
+Plus/		Rqpdf/		URLs		getrusage/
+[RCInterface-399]>git filter-branch --prune-empty --subdirectory-filter Rqpdf  master
+Rewrite 97fff17fb3afbe3e9f08d1edb7619aaf057f5d72 (15/15) (0 seconds passed, remaining 0 predicted)    
+Ref 'refs/heads/master' was rewritten
+[RCInterface-400]>ls
+CompileSteps/		Plus/			dotC/			src/
+DESCRIPTION		R/			err.c			tests/
+DebuggingSegFault	Rqpdf/			getrusage/
+NAMESPACE		configure.in		inst/
+[RCInterface-401]>pwd
+/Users/duncan/GitExpt/RCInterface
+[RCInterface-402]>cd ..
+]1; GitExpt]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt[~/GitExpt-403]>mkdir Rqpdf
+[~/GitExpt-404]>cd Rqpdf/
+]1; Rqpdf]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/Rqpdf[Rqpdf-405]>ls
+[Rqpdf-406]>git init
+Initialized empty Git repository in /Users/duncan/GitExpt/Rqpdf/.git/
+[Rqpdf-407]>git pull ../RCInterface/Rqpdf
+fatal: '../RCInterface/Rqpdf' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+[Rqpdf-408]>cd ..
+]1; GitExpt]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt[~/GitExpt-409]>ls
+RCInterface/	Rqpdf/
+[~/GitExpt-410]>ls
+RCInterface/	Rqpdf/
+[~/GitExpt-411]>cp -r ~/DSI/Workshops/RCInterface  RCInterface2
+[~/GitExpt-412]>ls
+RCInterface/	RCInterface2/	Rqpdf/
+[~/GitExpt-413]>cd RCInterface2
+]1; RCInterface2]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/RCInterface2[RCInterface2-414]>ls
+CompileSteps/	README.md	Rqpdf/		Topics.md~	URLs~		getrusage/	slides.html~
+Plus/		README.md~	Topics.md	URLs		dotC/		slides.html
+[RCInterface2-415]>git-subtree split --prefix=Rqpdf
+git-subtree: Command not found.
+[RCInterface2-416]>git subtree split --prefix=Rqpdf
+7d2ba426f55ecdada91fbb519d754dfaa36d7963
+[RCInterface2-417]>ls
+CompileSteps/	README.md	Rqpdf/		Topics.md~	URLs~		getrusage/	slides.html~
+Plus/		README.md~	Topics.md	URLs		dotC/		slides.html
+[RCInterface2-418]>cd ../RCInterface
+]1; RCInterface]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/RCInterface[RCInterface-419]>ls
+CompileSteps/		Plus/			dotC/			src/
+DESCRIPTION		R/			err.c			tests/
+DebuggingSegFault	Rqpdf/			getrusage/
+NAMESPACE		configure.in		inst/
+[RCInterface-420]>ls Rqpdf/
+R/		config.log	configure*	foo.R~		src/
+autom4te.cache/	config.status*	dict.R~		inst/
+[RCInterface-421]>ls Rqpdf/R
+fileVersion.R~	forms.R~	info.R~		qpdf.R~		version.R.in~
+[RCInterface-422]>cd ..
+]1; GitExpt]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt[~/GitExpt-423]>rm -fr RCInterface2/
+[~/GitExpt-424]>ls
+RCInterface/	Rqpdf/
+[~/GitExpt-425]>cd Rqpdf/
+]1; Rqpdf]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/Rqpdf[Rqpdf-426]>ls
+[Rqpdf-427]>cd ..
+]1; GitExpt]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt[~/GitExpt-428]>
+[~/GitExpt-428]>cp -r ~/DSI/Workshops/RCInterface  RCInterface2
+[~/GitExpt-429]>cd RCInterface
+]1; RCInterface]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/RCInterface[RCInterface-430]>cd ..
+]1; GitExpt]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt[~/GitExpt-431]>cd RCInterface2
+]1; RCInterface2]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt/RCInterface2[RCInterface2-432]>ls
+CompileSteps/	README.md	Rqpdf/		Topics.md~	URLs~		getrusage/	slides.html~
+Plus/		README.md~	Topics.md	URLs		dotC/		slides.html
+[RCInterface2-433]>ls
+CompileSteps/	README.md	Rqpdf/		Topics.md~	URLs~		getrusage/	slides.html~
+Plus/		README.md~	Topics.md	URLs		dotC/		slides.html
+[RCInterface2-434]>find . -name '*~'
+./Topics.md~
+./dotC/tests/show.R~
+./dotC/src/dotC.c~
+./dotC/src/dotCall.c~
+./slides.html~
+./Rqpdf/foo.R~
+./Rqpdf/dict.R~
+./Rqpdf/R/info.R~
+./Rqpdf/R/forms.R~
+./Rqpdf/R/version.R.in~
+./Rqpdf/R/qpdf.R~
+./Rqpdf/R/fileVersion.R~
+./Rqpdf/inst/sampleDocs/tmp.pdf~
+./Rqpdf/src/pqdfData.c~
+./Rqpdf/src/info.c~
+./Rqpdf/src/qpdfData.c~
+./Rqpdf/src/Rqpdf.h~
+./Rqpdf/src/Makevars.in~
+./Rqpdf/src/qpdf.c~
+./Rqpdf/src/numPages.cc~
+./Rqpdf/src/expt.cc~
+./Rqpdf/src/formValues.cc~
+./Rqpdf/src/fileVersion.c~
+./getrusage/R/rusage.R~
+./getrusage/src/rusage.c~
+./README.md~
+./CompileSteps/sm.c~
+./CompileSteps/simpleMath.c~
+./CompileSteps/Makefile~
+./URLs~
+./Plus/plus.c~
+./Plus/Makefile~
+[RCInterface2-435]>find . -name '*~' -exec rm {} \;
+[RCInterface2-436]>find . -name 'configure'
+./Rqpdf/configure
+[RCInterface2-437]>find . -name 'configure' -exec rm {} \;
+[RCInterface2-438]>find . -name '*.in'
+./Rqpdf/R/version.R.in
+./Rqpdf/configure.in
+./Rqpdf/src/Makevars.in
+[RCInterface2-439]>find . -name '*.in' | sed -e 's/.in//'
+./Rqpdf/R/version.R
+./Rqpdf/configure
+./Rqpdf/src/Makevars
+[RCInterface2-440]>find . -name '*.in' | sed -e 's/.in//' | rm 
+usage: rm [-f | -i] [-dPRrvW] file ...
+       unlink file
+[RCInterface2-441]>find . -name '*.in' | sed -e 's/.in//' | rm --
+usage: rm [-f | -i] [-dPRrvW] file ...
+       unlink file
+[RCInterface2-442]>rm `find . -name '*.in' | sed -e 's/.in//' `
+rm: ./Rqpdf/configure: No such file or directory
+[RCInterface2-443]>ls
+CompileSteps/	README.md	Topics.md	dotC/		slides.html
+Plus/		Rqpdf/		URLs		getrusage/
+[RCInterface2-444]>ls Rqpdf/src/
+Makevars.in	expt.cc		fileVersion.o	info.c		numPages.o	qpdfData.c
+Rqpdf.h		expt.o		formValues.cc	info.o		qpdf.c		qpdfData.o
+Rqpdf.so*	fileVersion.c	formValues.o	numPages.cc	qpdf.o
+[RCInterface2-445]>find . -name '*.o' -exec rm {} \;
+[RCInterface2-446]>find . -name '*.so' -exec rm {} \;
+[RCInterface2-447]>ls
+CompileSteps/	README.md	Topics.md	dotC/		slides.html
+Plus/		Rqpdf/		URLs		getrusage/
+[RCInterface2-448]>find
+usage: find [-H | -L | -P] [-EXdsx] [-f path] path ... [expression]
+       find [-H | -L | -P] [-EXdsx] -f path [path ...] [expression]
+[RCInterface2-449]>find .
+*** output flushed ***
+[RCInterface2-450]>git filter-branch --prune-empty --subdirectory-filter Rqpdf  master
+Cannot rewrite branches: You have unstaged changes.
+[RCInterface2-451]>git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	deleted:    Rqpdf/R/version.R
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Plus/plus
+	Rqpdf/inst/sampleDocs/OoPdfFormExample_uncompressed.pdf
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[RCInterface2-452]>git rm Rqpdf/R/version.R
+rm 'Rqpdf/R/version.R'
+[RCInterface2-453]>git commit -m "removed version.R since we have the .in form"
+[master 48d8206] removed version.R since we have the .in form
+ 1 file changed, 11 deletions(-)
+ delete mode 100644 Rqpdf/R/version.R
+[RCInterface2-454]>git filter-branch --prune-empty --subdirectory-filter Rqpdf  master
+Rewrite 48d820647670b63f14e60f48eb5ec09fa82a1e9c (11/16) (1 seconds passed, remaining 0 predicted)    
+Ref 'refs/heads/master' was rewritten
+[RCInterface2-455]>ls
+DESCRIPTION		Plus/			configure.in		src/
+DebuggingSegFault	R/			err.c			tests/
+NAMESPACE		Rqpdf/			inst/
+[RCInterface2-456]>ls Plus/
+plus*
+[RCInterface2-457]>rm -fr Plus/
+[RCInterface2-458]>ls Rqpdf/
+autom4te.cache/	config.log	config.status*	inst/
+[RCInterface2-459]>ls Rqpdf/inst/
+sampleDocs/
+[RCInterface2-460]>ls Rqpdf/inst/sampleDocs/
+OoPdfFormExample_uncompressed.pdf
+[RCInterface2-461]>rm -fr Rqpdf/
+[RCInterface2-462]>ls
+DESCRIPTION		R/			inst/
+DebuggingSegFault	configure.in		src/
+NAMESPACE		err.c			tests/
+[RCInterface2-463]>R CMD INSTALL .
+*** output flushed ***
+[RCInterface2-464]>ls
+DESCRIPTION		R/			inst/
+DebuggingSegFault	configure.in		src/
+NAMESPACE		err.c			tests/
+[RCInterface2-465]>R CMD INSTALL .
+* installing to library ‘/Users/duncan/Rpackages’
+* installing *source* package ‘Rqpdf’ ...
+** libs
+make: Nothing to be done for `all'.
+installing to /Users/duncan/Rpackages/Rqpdf/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+No man pages found in package  ‘Rqpdf’ 
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+Error: package or namespace load failed for ‘Rqpdf’ in dyn.load(file, DLLpath = DLLpath, ...):
+ unable to load shared object '/Users/duncan/Rpackages/Rqpdf/libs/Rqpdf.so':
+  dlopen(/Users/duncan/Rpackages/Rqpdf/libs/Rqpdf.so, 6): Symbol not found: __ZN16QPDFObjectHandle11getIntValueEv
+  Referenced from: /Users/duncan/Rpackages/Rqpdf/libs/Rqpdf.so
+  Expected in: flat namespace
+ in /Users/duncan/Rpackages/Rqpdf/libs/Rqpdf.so
+Error: loading failed
+recover called non-interactively; frames dumped, use debugger() to view
+* DONE (Rqpdf)
+[RCInterface2-466]>autoconf 
+[RCInterface2-467]>rm src/*.o
+[RCInterface2-468]>R CMD INSTALL .
+* installing to library ‘/Users/duncan/Rpackages’
+* installing *source* package ‘Rqpdf’ ...
+checking for pkg-config... /usr/local/bin/pkg-config
+QPDF Version = 8.2.1
+configure: creating ./config.status
+config.status: creating src/Makevars
+config.status: creating R/version.R
+** libs
+g++ -std=gnu++11 -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -c expt.cc -o expt.o
+gcc -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -Wall -c fileVersion.c -o fileVersion.o
+g++ -std=gnu++11 -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -c formValues.cc -o formValues.o
+gcc -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -Wall -c info.c -o info.o
+g++ -std=gnu++11 -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -c numPages.cc -o numPages.o
+gcc -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -Wall -c qpdf.c -o qpdf.o
+gcc -I"/Users/duncan/R-devel/build/include" -DNDEBUG -I/usr/local/include  -I/usr/local/include   -fPIC  -g -Wall -c qpdfData.c -o qpdfData.o
+g++ -std=gnu++11 -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/usr/local/lib -o Rqpdf.so expt.o fileVersion.o formValues.o info.o numPages.o qpdf.o qpdfData.o -L/usr/local/lib -lqpdf -Wl,-framework -Wl,CoreFoundation
+ld: warning: text-based stub file /System/Library/Frameworks//CoreFoundation.framework/CoreFoundation.tbd and library file /System/Library/Frameworks//CoreFoundation.framework/CoreFoundation are out of sync. Falling back to library file for linking.
+installing to /Users/duncan/Rpackages/Rqpdf/libs
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+No man pages found in package  ‘Rqpdf’ 
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (Rqpdf)
+[RCInterface2-469]>ls
+DESCRIPTION		autom4te.cache/		configure.in		tests/
+DebuggingSegFault	config.log		err.c
+NAMESPACE		config.status*		inst/
+R/			configure*		src/
+[RCInterface2-470]>ls
+DESCRIPTION		autom4te.cache/		configure.in		tests/
+DebuggingSegFault	config.log		err.c
+NAMESPACE		config.status*		inst/
+R/			configure*		src/
+[RCInterface2-471]>
+]1; GitExpt]2; [tcsh]   Duncans-MacBook-Pro::/Users/duncan/GitExpt[~/GitExpt-472]>mv RCInterface2 ~/DSIProjects/Rqpdf
+[~/GitExpt-473]>

@@ -45,8 +45,21 @@ git stash
 git ls-files
 
 
-separate a big commit into smaller more focused ones
-combine several related commits into one.
+
++ Don't hesitate to create a new clone and work on that.
+ + This avoids git stash
++ Make copies/backups of the repository and work on the copy to experiment
++ Explore git and SO to find out new things you can do with git.
++ Explore with 2 clones on the same machine, or on different machines.
++ Note that you don't need github/gitlab/bitbucket.  You can have repos on a local machine or 
+  server and push to those using ssh logins.
+
+
+
+
+
++ separate a big commit into smaller more focused ones
++ combine several related commits into one.
 
 
 # Concepts

@@ -1,0 +1,145 @@
+git init
+Initialized empty Git repository in /Users/duncan/DSI/Workshops/GitEg/RecoverDelete/.git/
+bash-3.2$ git add tmp
+];RecoverDeletebash-3.2$ git commit -m "initial commit of tmp"
+[master (root-commit) 56f15d9] initial commit of tmp
+ 1 file changed, 1 insertion(+)
+ create mode 100644 tmp
+];RecoverDeletebash-3.2$ git rm tmp
+rm 'tmp'
+];RecoverDeletebash-3.2$ ls
+tmp~
+];RecoverDeletebash-3.2$ git commit -m "removed tmp"
+[master 1eeaecd] removed tmp
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 tmp
+];RecoverDeletebash-3.2$ git log
+commit 1eeaecd84fe24f3cb530399af6c079b668d34194 (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:53:18 2019 -0700
+
+    removed tmp
+
+commit 56f15d9e31c923d924bb529c362e0d7445c5c528
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:53:01 2019 -0700
+
+    initial commit of tmp
+];RecoverDeletebash-3.2$ ls
+tmp~
+];RecoverDeletebash-3.2$ rmb
+];RecoverDeletebash-3.2$ ls
+];RecoverDeletebash-3.2$ git reset --hard 56f15
+HEAD is now at 56f15d9 initial commit of tmp
+];RecoverDeletebash-3.2$ ls
+tmp
+];RecoverDeletebash-3.2$ cat tmp
+This is a temporary file that we will delete and then recover.
+
+
+ git add Session 
+];RecoverDeletebash-3.2$ git commit -m "shell commands in this example"
+[master c9a372b] shell commands in this example
+ 1 file changed, 37 insertions(+)
+ create mode 100644 Session
+bash-3.2$ ls
+#Session#	README.md	README.md~	Session		tmp
+];RecoverDeletebash-3.2$ git log
+commit c9a372baa4d0fb1f36f73a955b84600375978c7f (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:55:01 2019 -0700
+
+    shell commands in this example
+
+commit 56f15d9e31c923d924bb529c362e0d7445c5c528
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:53:01 2019 -0700
+
+    initial commit of tmp
+bash-3.2$ git diff --stat c9a372
+bash-3.2$ git show --name-only c9a372
+commit c9a372baa4d0fb1f36f73a955b84600375978c7f (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:55:01 2019 -0700
+
+    shell commands in this example
+
+Session
+];RecoverDeletebash-3.2$ git show --pretty="" --name-only c9a372
+Session
+];RecoverDeletebash-3.2$ ls
+README.md	README.md~	Session		Session~	tmp
+];RecoverDeletebash-3.2$ git log
+commit c9a372baa4d0fb1f36f73a955b84600375978c7f (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:55:01 2019 -0700
+
+    shell commands in this example
+
+commit 56f15d9e31c923d924bb529c362e0d7445c5c528
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:53:01 2019 -0700
+
+    initial commit of tmp
+];RecoverDeletebash-3.2$ git rm tmp
+rm 'tmp'
+];RecoverDeletebash-3.2$ git commit -m "removed tmp again"
+[master 1e8f064] removed tmp again
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 tmp
+
+];RecoverDeletebash-3.2$ git checkout 56f15 -- tmp
+];RecoverDeletebash-3.2$ ls
+README.md	README.md~	Session		Session~	tmp
+];RecoverDeletebash-3.2$ git log
+commit 39df160f8cbf07b1738aee2aa14e769b474d8fb7 (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 08:12:16 2019 -0700
+
+    updates to Session
+
+commit 6dd8c8ae9a9f67de9e427b013f2a437f67af33cf
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 08:12:09 2019 -0700
+
+    readme updates
+
+commit 1e8f0649b061c55b31f4ccba094ce58a772015b0
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 08:11:38 2019 -0700
+
+    removed tmp again
+
+commit c9a372baa4d0fb1f36f73a955b84600375978c7f
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:55:01 2019 -0700
+
+    shell commands in this example
+
+commit 56f15d9e31c923d924bb529c362e0d7445c5c528
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 07:53:01 2019 -0700
+
+    initial commit of tmp
+bash-3.2$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	new file:   tmp
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   README.md
+
+];RecoverDeletebash-3.2$ git add tmp 
+];RecoverDeletebash-3.2$ git commit -m "recovered tmp via git checkout ref -- tmp"
+[master 7c756b0] recovered tmp via git checkout ref -- tmp
+ 1 file changed, 1 insertion(+)
+ create mode 100644 tmp
+];RecoverDeletebash-3.2$ git add README.md
+];RecoverDeletebash-3.2$ git commit -m "note on git checkout ref -- tmp"
+[master 975ab2d] note on git checkout ref -- tmp
+ 1 file changed, 7 insertions(+)

@@ -1,5 +1,7 @@
 # Git Workshop
 
+[https://github.com/dsidavis/GitWorkshop2](https://github.com/dsidavis/GitWorkshop2)
+
 This is currently scheduled as a 2-part workshop, today and next Friday.
 
 Day 1 is for hands on working with git and gaining experience and familiarity with
@@ -25,10 +27,11 @@ Add questions to the following google doc:
 [https://docs.google.com/document/d/1vYwPVTQ_BytoBAkthZxJ6Qf2zjMW1HgqrK5-eT39yNw/edit?usp=sharing](https://docs.google.com/document/d/1vYwPVTQ_BytoBAkthZxJ6Qf2zjMW1HgqrK5-eT39yNw/edit?usp=sharing)
 
 # Day 1
+## Goals
   + Get very comfortable with the practical details of using git collaboratively.
   + Work in groups of 2 or 3 (which?)
   
-## Hands-on
+## Hands-on Activities
   + one of you (with the help/oversight of others) create a local repository
     + <!-- git init -->
   + Create a new repository on github/gitlab/bitbucket
@@ -71,59 +74,14 @@ Add questions to the following google doc:
      + Then remove it. <!-- git rm -->
 
 
-## Overview of Git Concepts, Elements and Vocabulary
-+ 3 trees - working directory, index/stage, commits
-+ Commit
-+ Stage/Index and git add file; Change file => means new changes won't be in commit.
-+ SHA
-   + content-based hash value
-   + effectively unique.
-+ Tag
-+ Branch
-  + master
-+ add & commit and push  
-  + local and remote repositores - commit versus publish
-+ garbage collection of commits that are not reachable.
-+ .git directory
-  + config
-  + can git clone or cp -r 
-    + What's the difference?
-	
-  
-## Workflow Philosophy
-+ Commit locally early and often 
-+ Use branches for each new feature/concept 
-  + Keep separate from master so can easily pull on master from remote repository
-  + merge branch into master when complete
-  + delete branch when finished
-  + remote branches for working collaboratively on a feature/branch.
-+ Don't push to remote if you think you will ever change the commits
-+ Change the commits to tidy up concepts
-  + Most of the time, we don't care. Just git push often for others to pickup.
-  + But reasons to change commits.
-    + Change commit messages to be more informative.
-    + Split big commits into separate, more focused commits to make easy to undo each one.
-    + Combine numerous related commits into one so easily reverted/undone
-    + Change the order of the commits.
+
+## [Git Concepts](GitConcepts.md)
+
+## [Workflow Guidelines](WorkflowGuidelines.md)
 
 
-
-## Specific Workflow Steps/Skills/Commands
-+ See what will be committed.
-  + What files
-  + What content
-+ Unstage a file <!-- git rm --cached file  -->
-+ Commit a subset of changes in a file
-  + git add -p or  git add -i
-+ stash current changes
-
-+ Undo a commit
-  + git revert
-  + git reset
-
-
-
-## What are git topics you want to know more about next week 
+## Day 2  - Possible Topics
+### What are git topics you want to know more about next week 
 I have numerous topics I explored and will share. But it would be
 great to have emails/posts in which you identify aspects of VCS/git that you 
 have questions about.

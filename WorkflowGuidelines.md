@@ -1,5 +1,22 @@
+## Workflow Philosophy
++ Commit locally early and often 
++ Use branches for each new feature/concept 
+  + Keep separate from master so can easily pull on master from remote repository
+  + merge branch into master when complete
+  + delete branch when finished
+  + remote branches for working collaboratively on a feature/branch.
++ Don't push to remote if you think you will ever change the commits
++ Change the commits to tidy up concepts
+  + Most of the time, we don't care. Just git push often for others to pickup.
+  + But reasons to change commits.
+    + Change commit messages to be more informative.
+    + Split big commits into separate, more focused commits to make easy to undo each one.
+    + Combine numerous related commits into one so easily reverted/undone
+    + Change the order of the commits.
 
-From 
+
+
+## From 
 `git help workflows`
 
 ```

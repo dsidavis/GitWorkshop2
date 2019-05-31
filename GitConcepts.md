@@ -16,3 +16,36 @@
   + config
   + can git clone or cp -r 
     + What's the difference?
+
+
+
+
++ https://zwischenzugs.com/2018/10/30/five-things-i-wish-id-known-about-git/
+
+
++ Three trees OR 4 stages
+  + working directory
+  + index/cache
+  + commited
+  + remote repository
+
+
++ Reference (ref) = pointer to a commit
+ hash, branch, tag, HEAD
+
+
+
+
+* Detached head
+
+
+
+Revert and undo a commit.
+
+
+Split a repository into separate repositories.
+ + Keep the history.
+
+
+Combine commits into a single commit - squashing.
+

@@ -3,15 +3,103 @@ How to deal with the error
 fatal: cannot do a partial commit during a merge.
 ```
 
-Let's see if we can reproduce it.
-
 This probably comes from a merge conflict.
+The issue appears to be that we are trying to commit one file that we resolved,
+but there are others that are not staged for commit.
+Since this is part of a merge, we need to commit all of the resolved files in one commit.
+
+This might be as simple as not specifying which file to commit.
+Or it might be that you haven't staged all of the relevant files.
+
+Let's see if we can reproduce it.
 So let's create a branch, add some commits
 and the merge in such a way that we get a conflict.
 Or more specifically that we get 2 or more conflicts in 
 2 or more files.
 
+
 We'll create 2 files - A and B
 and edit those.
 ```
 ```
+
+
+
+# Session
+git init
+[PartialCommitError-267]>git add A B
+[PartialCommitError-268]>git commit -m "two files A and B"
+[master (root-commit) 23e373f] two files A and B
+ 2 files changed, 2 insertions(+)
+ create mode 100644 A
+ create mode 100644 B
+[PartialCommitError-269]>git checkout -b myBranch
+Switched to a new branch 'myBranch'
+[PartialCommitError-270]>git branch -a
+  master
+* myBranch
+[PartialCommitError-272]>git add A 
+[PartialCommitError-273]>git commit -m "change to A on myBranch"
+[myBranch 9e6552b] change to A on myBranch
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[PartialCommitError-274]>git add B
+[PartialCommitError-275]>git commit -m "change to B on myBranch"
+[myBranch ec83b8d] change to B on myBranch
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+[PartialCommitError-276]>git checkout master
+Switched to branch 'master'
+[PartialCommitError-277]>git log
+commit 23e373f36c79430785f375a893298c627ddfbc2e (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Fri May 31 18:56:59 2019 -0700
+
+    two files A and B
+[PartialCommitError-278]>cat A
+Line 1 of A
+[PartialCommitError-279]>cat B
+Line 1 of B.
+[PartialCommitError-280]>git add A B
+[PartialCommitError-281]>git commit -m "changes to A and B on master"
+[master c0fc6da] changes to A and B on master
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+[PartialCommitError-282]>git merge myBranch
+Auto-merging B
+CONFLICT (content): Merge conflict in B
+Auto-merging A
+CONFLICT (content): Merge conflict in A
+Automatic merge failed; fix conflicts and then commit the result.
+[PartialCommitError-283]>cat B
+Line 1 of B. On master
+Line 1 of B. On myBranch
+
+
+[PartialCommitError-284]>git add B
+[PartialCommitError-285]>git commit -m "resolved conflict in B"
+U	A
+error: Committing is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+[PartialCommitError-286]>git status
+On branch master
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+
+	modified:   B
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+
+	both modified:   A
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	README.md
+
+[PartialCommitError-287]>git add A
+[PartialCommitError-288]>git commit -m "resolved conflict in B and also in A"
+[master 09465fd] resolved conflict in B and also in A

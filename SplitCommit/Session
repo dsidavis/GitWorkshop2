@@ -1,0 +1,207 @@
+git init
+[SplitCommit-316]>echo "Start" > file1
+git add file1
+git commit -m "initial commit"
+[SplitCommit-317]>[SplitCommit-318]>[master (root-commit) a1995d2] initial commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file1
+[SplitCommit-319]>for v in A B C D E F ; do
+  echo $v >> file1
+done
+for: Command not found.
+do: Command not found.
+[SplitCommit-320]>v: Undefined variable.
+[SplitCommit-321]>done: Command not found.
+[SplitCommit-322]>bash
+];SplitCommitbash-3.2$ for v in A B C D E F ; do
+  echo $v >> file1
+done
+for v in A B C D E F ; do
+>   echo $v >> file1
+> done
+];SplitCommitbash-3.2$ cat file1
+Start
+A
+B
+C
+D
+E
+F
+];SplitCommitbash-3.2$ git diff file1
+diff --git a/file1 b/file1
+index 3b62dc1..7bdf396 100644
+--- a/file1
++++ b/file1
+@@ -1 +1,7 @@
+ Start
++A
++B
++C
++D
++E
++F
+];SplitCommitbash-3.2$ git add file`
+> git add file`  C-c C-c
+];SplitCommitbash-3.2$ git add file1
+];SplitCommitbash-3.2$ git commit -m "added 6 lines as one commit"
+[master 685edb0] added 6 lines as one commit
+ 1 file changed, 6 insertions(+)
+];SplitCommitbash-3.2$ git rebase -i HEAD~
+Stopped at 685edb0...  added 6 lines as one commit
+You can amend the commit now, with
+
+  git commit --amend 
+
+Once you are satisfied with your changes, run
+
+  git rebase --continue
+];SplitCommitbash-3.2$ git add -p file1 
+No changes.
+];SplitCommitbash-3.2$ git reset HEAD^
+Unstaged changes after reset:
+M	file1
+];SplitCommitbash-3.2$ git status
+interactive rebase in progress; onto a1995d2
+Last command done (1 command done):
+   edit 685edb0 added 6 lines as one commit
+No commands remaining.
+You are currently splitting a commit while rebasing branch 'master' on 'a1995d2'.
+  (Once your working directory is clean, run "git rebase --continue")
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   file1
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	.#README.md
+	README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+];SplitCommitbash-3.2$ git add -p file1 
+diff --git a/file1 b/file1
+index 3b62dc1..7bdf396 100644
+--- a/file1
++++ b/file1
+@@ -1 +1,7 @@
+ Start
++A
++B
++C
++D
++E
++F
+Stage this hunk [y,n,q,a,d,e,?]? e
+error: corrupt patch at line 13
+Your edited hunk does not apply. Edit again (saying "no" discards!) [y/n]? y
+error: corrupt patch at line 8
+Your edited hunk does not apply. Edit again (saying "no" discards!) [y/n]? y
+
+];SplitCommitbash-3.2$ git diff
+diff --git a/file1 b/file1
+index 48d8a4c..7bdf396 100644
+--- a/file1
++++ b/file1
+@@ -1,4 +1,7 @@
+ Start
+ A
++B
+ C
++D
+ E
++F
+];SplitCommitbash-3.2$ git show :file1
+Start
+A
+C
+E
+];SplitCommitbash-3.2$ git commit -m "committing just A C E"
+[detached HEAD 208de2e] committing just A C E
+ 1 file changed, 3 insertions(+)
+];SplitCommitbash-3.2$ git add -p file1 
+diff --git a/file1 b/file1
+index 48d8a4c..7bdf396 100644
+--- a/file1
++++ b/file1
+@@ -1,4 +1,7 @@
+ Start
+ A
++B
+ C
++D
+ E
++F
+Stage this hunk [y,n,q,a,d,s,e,?]? e
+error: patch failed: file1:1
+error: file1: patch does not apply
+Your edited hunk does not apply. Edit again (saying "no" discards!) [y/n]? y
+error: corrupt patch at line 10
+Your edited hunk does not apply. Edit again (saying "no" discards!) [y/n]? y
+error: patch failed: file1:1
+error: file1: patch does not apply
+Your edited hunk does not apply. Edit again (saying "no" discards!) [y/n]? y
+
+];SplitCommitbash-3.2$ git show :file1
+Start
+A
+B
+C
+E
+];SplitCommitbash-3.2$ git commit -m "committing B"
+[detached HEAD fb9370a] committing B
+ 1 file changed, 1 insertion(+)
+];SplitCommitbash-3.2$ git add -p file1 
+diff --git a/file1 b/file1
+index 5ebd5fa..7bdf396 100644
+--- a/file1
++++ b/file1
+@@ -2,4 +2,6 @@ Start
+ A
+ B
+ C
++D
+ E
++F
+Stage this hunk [y,n,q,a,d,s,e,?]? e
+
+];SplitCommitbash-3.2$ git show :file1
+Start
+A
+B
+C
+D
+E
+F
+];SplitCommitbash-3.2$ git commit -m "finally D and F"
+[detached HEAD a04e308] finally D and F
+ 1 file changed, 2 insertions(+)
+];SplitCommitbash-3.2$ git rebase --continue
+Successfully rebased and updated refs/heads/master.
+];SplitCommitbash-3.2$ git log
+commit a04e308d125f9b921016abfd5c180b4a2f5b4e51 (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sat Jun 1 07:02:33 2019 -0700
+
+    finally D and F
+
+commit fb9370ab7161f3439e131701f3c9c778ff4b5a46
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sat Jun 1 07:01:59 2019 -0700
+
+    committing B
+
+commit 208de2e3858433ec940e8404d156edd42de1ae92
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sat Jun 1 06:59:40 2019 -0700
+
+    committing just A C E
+
+commit a1995d26f99ef975c89f27aabd07702822c092d7
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sat Jun 1 06:55:29 2019 -0700
+
+    initial commit
+bash-3.2$ 

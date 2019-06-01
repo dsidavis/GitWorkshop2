@@ -34,3 +34,19 @@ git rev-list HEAD -- tmp
 # How do bring a subset of changes from one branch onto another branch?
 Use git cherry-pick. This is for commits, while git merge is for merging all commits from an entire branch.
 See [CherryPick](CherryPick).
+
+
+# How do list all the files under version control in the repository
+```
+git ls-tree --full-tree -r --name-only HEAD
+```
+
+git ls-files
+
+
+
+# How do I see the contents of a file in the index/stage/cache
+```
+git show :filename
+```
+

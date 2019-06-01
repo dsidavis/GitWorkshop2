@@ -26,6 +26,9 @@ Add questions to the following google doc:
 [https://tinyurl.com/y3d37825](https://tinyurl.com/y3d37825)
 [https://docs.google.com/document/d/1vYwPVTQ_BytoBAkthZxJ6Qf2zjMW1HgqrK5-eT39yNw/edit?usp=sharing](https://docs.google.com/document/d/1vYwPVTQ_BytoBAkthZxJ6Qf2zjMW1HgqrK5-eT39yNw/edit?usp=sharing)
 
+
+## [Setup](Setup.md)
+
 # Day 1
 ## Goals
   + Get very comfortable with the practical details of using git collaboratively.
@@ -73,6 +76,9 @@ Add questions to the following google doc:
   + Add a file, edit it and commit it.
      + Then remove it. <!-- git rm -->
 
+
+## Sample Repos
++ [SimGitBranch](https://github.com:dsidavis/SimGitBranch)
 
 
 ## [Git Concepts](GitConcepts.md)

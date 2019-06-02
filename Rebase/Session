@@ -1,0 +1,102 @@
+
+[GitEg-575]>mkdir Rebase
+[GitEg-576]>cd Rebase/
+[Rebase-578]>git init
+Initialized empty Git repository in /Users/duncan/DSI/Workshops/GitEg/Rebase/.git/
+[Rebase-579]>git add foo.R
+[Rebase-580]>git commit -m "initial commit; simple foo() function"
+[master (root-commit) e6fefe0] initial commit; simple foo() function
+ 1 file changed, 6 insertions(+)
+ create mode 100644 foo.R
+[Rebase-581]>git add foo.R
+[Rebase-582]>git commit -m "changed what we add to x"
+[master 99f830a] changed what we add to x
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[Rebase-583]>git checkout -b devel
+Switched to a new branch 'devel'
+[Rebase-584]>git add README.md
+[Rebase-585]>git commit -m "an outline"
+[devel 2a22dc5] an outline
+ 1 file changed, 11 insertions(+)
+ create mode 100644 README.md
+[Rebase-586]>git add foo.R
+[Rebase-587]>git branch
+* devel
+  master
+[Rebase-588]>git commit -m "added foobar() on devel"
+[devel 4fa8fdb] added foobar() on devel
+ 1 file changed, 7 insertions(+)
+[Rebase-589]>open -a GitX .
+[Rebase-590]>git checkout master
+Switched to branch 'master'
+[Rebase-591]>git add foo.R
+[Rebase-592]>git commit -m "offset as a parameter. On master branch"
+[master 0e7db7f] offset as a parameter. On master branch
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+[Rebase-593]>git checkout devel
+Switched to branch 'devel'
+[Rebase-594]>git rebase --help
+[Rebase-595]>git rebase master devel
+First, rewinding head to replay your work on top of it...
+Applying: an outline
+Applying: added foobar() on devel
+Using index info to reconstruct a base tree...
+M	foo.R
+.git/rebase-apply/patch:15: new blank line at EOF.
++
+warning: 1 line adds whitespace errors.
+Falling back to patching base and 3-way merge...
+Auto-merging foo.R
+[Rebase-596]>cat foo.R
+foo =
+function(x, offset = 20)
+{
+   x + offset
+}
+
+
+foobar =
+function(x)
+{
+  log(foo(x))
+}
+
+[Rebase-597]>git show-branch
+* [devel] added foobar() on devel
+ ! [master] offset as a parameter. On master branch
+--
+*  [devel] added foobar() on devel
+*  [devel^] an outline
+*+ [master] offset as a parameter. On master branch
+[Rebase-598]>git log -g
+*** output flushed ***
+[Rebase-599]>git log
+commit 3bbc28f34d15c8b96880b1f76e4a2ba17c79095f (HEAD -> devel)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 16:52:25 2019 -0700
+
+    added foobar() on devel
+
+commit 524dc869ec5a8d6786b30fee9ea631a59b8e3e37
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 16:51:39 2019 -0700
+
+    an outline
+
+commit 0e7db7f068584b70f82ae0aba95a793c740d2053 (master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 16:53:25 2019 -0700
+
+    offset as a parameter. On master branch
+
+commit 99f830ab1621945049ad8a89d005ce23be1ddf5d
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 16:49:07 2019 -0700
+
+    changed what we add to x
+
+commit e6fefe0db63b4dc25b7dd38523628b5bbcd00676
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 16:48:39 2019 -0700
+
+    initial commit; simple foo() function

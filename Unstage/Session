@@ -1,0 +1,268 @@
+echo "First" > A
+[Unstage-383]>git add A
+[Unstage-384]>git commit -m "first version of A"
+[master (root-commit) 1b1e904] first version of A
+ 1 file changed, 1 insertion(+)
+ create mode 100644 A
+[Unstage-385]>echo Second >> A
+[Unstage-386]>git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   A
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[Unstage-387]>git add A
+[Unstage-388]>echo Third >> A
+[Unstage-389]>git diff A
+diff --git a/A b/A
+index 802c8d9..ab7c514 100644
+--- a/A
++++ b/A
+@@ -1,2 +1,3 @@
+ First
+ Second
++Third
+
+git diff --cached A
+diff --git a/A b/A
+index 4856fe2..802c8d9 100644
+--- a/A
++++ b/A
+@@ -1 +1,2 @@
+ First
++Second
+
+git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   A
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   A
+
+[Unstage-402]>cat A
+First
+Second
+Third
+
+[Unstage-403]>git reset HEAD A
+Unstaged changes after reset:
+M	A
+[Unstage-404]>git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   A
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[Unstage-405]>cat A
+First
+Second
+Third
+[Unstage-406]>git commit -m "unstaged the contents with Second and now committing Second and Third"
+On branch master
+Changes not staged for commit:
+	modified:   A
+
+no changes added to commit
+[Unstage-407]>git add A
+[Unstage-408]>git commit -m "unstaged the contents with Second and now committing Second and Third"
+[master 7141ed0] unstaged the contents with Second and now committing Second and Third
+ 1 file changed, 2 insertions(+)
+[Unstage-409]>git status
+On branch master
+nothing to commit, working tree clean
+[Unstage-410]>cat A
+First
+Second
+Third
+[Unstage-411]>git log
+commit 7141ed0e3ff5a08921c95d500178e2baa92e856e (HEAD -> master)
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 08:35:10 2019 -0700
+
+    unstaged the contents with Second and now committing Second and Third
+
+commit 1b1e9040bb3c21a32fae90162d037651ccceaafe
+Author: Duncan Temple Lang <duncan@r-project.org>
+Date:   Sun Apr 14 08:10:23 2019 -0700
+
+    first version of A
+
+
+
+Stashing
+
+
+[Unstage-412]>echo "" >> A
+[Unstage-413]>ls
+A		Session		Session~
+[Unstage-414]>cat A
+First
+Second
+Third
+
+[Unstage-415]>echo Fourth >> A
+[Unstage-416]>cat A
+First
+Second
+Third
+
+Fourth
+[Unstage-417]>git add A
+[Unstage-418]>git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   A
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Session
+
+[Unstage-419]>git stash --help
+WARNING: terminal is not fully functional
+-  (press RETURN) 
+GIT-STASH(1)                                        Git Manual                                        GIT-STASH(1)
+
+NAME
+       git-stash - Stash the changes in a dirty working directory away
+
+SYNOPSIS
+       git stash list [<options>]
+       git stash show [<stash>]
+       git stash drop [-q|--quiet] [<stash>]
+       git stash ( pop | apply ) [--index] [-q|--quiet] [<stash>]
+       git stash branch <branchname> [<stash>]
+       git stash [push [-p|--patch] [-k|--[no-]keep-index] [-q|--quiet]
+                    [-u|--include-untracked] [-a|--all] [-m|--message <message>]
+                    [--] [<pathspec>...]]
+       git stash clear
+       git stash create [<message>]
+       git stash store [-m|--message <message>] [-q|--quiet] <commit>
+
+DESCRIPTION
+       Use git stash when you want to record the current state of the working directory and the index, but want to
+       go back to a clean working directory. The command saves your local modifications away and reverts the
+       working directory to match the HEAD commit.
+
+       The modifications stashed away by this command can be listed with git stash list, inspected with git stash
+       show, and restored (potentially on top of a different commit) with git stash apply. Calling git stash
+       without any arguments is equivalent to git stash push. A stash is by default listed as "WIP on branchname
+       ...", but you can give a more descriptive message on the command line when you create one.
+
+       The latest stash you created is stored in refs/stash; older stashes are found in the reflog of this
+       reference and can be named using the usual reflog syntax (e.g. stash@{0} is the most recently created
+       stash, stash@{1} is the one before it, stash@{2.hours.ago} is also possible). Stashes may also be
+       referenced by specifying just the stash index (e.g. the integer n is equivalent to stash@{n}).
+
+OPTIONS
+       push [-p|--patch] [-k|--[no-]keep-index] [-u|--include-untracked] [-a|--all] [-q|--quiet] [-m|--message
+       <message>] [--] [<pathspec>...]
+           Save your local modifications to a new stash entry and roll them back to HEAD (in the working tree and
+:q
+[Unstage-420]>git stash push
+Saved working directory and index state WIP on master: 7141ed0 unstaged the contents with Second and now committing Second and Third
+[Unstage-421]>git stash list
+stash@{0}: WIP on master: 7141ed0 unstaged the contents with Second and now committing Second and Third
+[Unstage-422]>cat A
+First
+Second
+Third
+[Unstage-423]>git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Session
+
+nothing added to commit but untracked files present (use "git add" to track)
+[Unstage-424]>ls -asl
+total 24
+0 drwxr-xr-x   6 duncan  staff   192 Apr 14 08:37 ./
+0 drwxr-xr-x  38 duncan  staff  1216 Apr 14 08:09 ../
+0 drwxr-xr-x  14 duncan  staff   448 Apr 14 08:38 .git/
+8 -rw-r--r--   1 duncan  staff    19 Apr 14 08:37 A
+8 -rw-r--r--   1 duncan  staff  2521 Apr 14 08:36 Session
+8 -rw-r--r--   1 duncan  staff  2519 Apr 14 08:36 Session~
+[Unstage-425]>echo "Other text" >> A
+[Unstage-426]>git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   A
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Session
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[Unstage-427]>git stash pop
+error: Your local changes to the following files would be overwritten by merge:
+	A
+Please commit your changes or stash them before you merge.
+Aborting
+[Unstage-428]>git add A
+[Unstage-429]>git commit -m "added to A before popping the stashed version"
+[master eb6e6f1] added to A before popping the stashed version
+ 1 file changed, 1 insertion(+)
+[Unstage-430]>git stash pop
+Auto-merging A
+CONFLICT (content): Merge conflict in A
+[Unstage-431]>cat A
+First
+Second
+Third
+<<<<<<< Updated upstream
+Other text
+=======
+
+Fourth
+>>>>>>> Stashed changes
+[Unstage-432]>cat A
+First
+Second
+Third
+
+Other text
+
+
+Fourth
+
+[Unstage-433]>git add A
+[Unstage-434]>git commit -m "resolved the stashed version with the updated version"
+[master 4aa1d14] resolved the stashed version with the updated version
+ 1 file changed, 5 insertions(+)
+[Unstage-435]>git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Session
+
+nothing added to commit but untracked files present (use "git add" to track)
+[Unstage-436]>git add Session
+[Unstage-437]>git reset HEAD Session
+[Unstage-438]>git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	Session
+
+nothing added to commit but untracked files present (use "git add" to track)

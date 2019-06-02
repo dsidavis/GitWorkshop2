@@ -1,0 +1,2 @@
+When we checkout a commit/SHA, we are not pointing to a branch but to a commit.
+This is a detached HEAD state.

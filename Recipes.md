@@ -50,3 +50,8 @@ git ls-files
 git show :filename
 ```
 
+
+# Tell git never to modify/merge a specific file in your repository
+```
+git update-index --assume-unchanged <pathToLocalFile>
+```

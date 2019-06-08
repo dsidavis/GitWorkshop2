@@ -30,6 +30,22 @@ git diff --stat --cached origin/master
 git rev-list HEAD -- tmp
 ```
 
+# How do I find out what files have conflicts in my current repository, e.g., after I merge/pull
+```
+git diff --name-only --diff-filter=U
+```
+If you use this often enough, make an alias for it in your ~/.gitconfig
+```
+git config --global alias.conflicts "diff --name-only --diff-filter=U"
+```
+and then you can call it with
+```
+git conflicts
+```
+
+See [https://stackoverflow.com/questions/3065650/whats-the-simplest-way-to-list-conflicted-files-in-git](https://stackoverflow.com/questions/3065650/whats-the-simplest-way-to-list-conflicted-files-in-git)
+
+
 
 # How do bring a subset of changes from one branch onto another branch?
 Use git cherry-pick. This is for commits, while git merge is for merging all commits from an entire branch.
@@ -54,4 +70,9 @@ git show :filename
 # Tell git never to modify/merge a specific file in your repository
 ```
 git update-index --assume-unchanged <pathToLocalFile>
+```
+
+# How do I remove all mentions of a particular file, e.g. passwords, large file or some indelicate remark/comment.
+```
+git filter-branch --tree-filter 'rm -f password.txt'
 ```
